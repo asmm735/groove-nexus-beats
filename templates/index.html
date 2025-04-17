@@ -14,10 +14,21 @@
             <h1>Svarithm</h1>
             <nav>
                 <ul>
-                    <li><a href="#home">Home</a></li>
+                    <li><a href="#home" class="active">Home</a></li>
                     <li><a href="#search">Search</a></li>
                     <li><a href="#library">Your Library</a></li>
                 </ul>
+                <div class="playlists">
+                    <h2>Playlists</h2>
+                    <button id="createPlaylist" class="create-playlist-btn">
+                        <i class="fas fa-plus"></i> Create Playlist
+                    </button>
+                    <ul id="playlistList">
+                        {% for playlist in playlists %}
+                        <li data-id="{{ playlist.id }}">{{ playlist.name }}</li>
+                        {% endfor %}
+                    </ul>
+                </div>
             </nav>
         </aside>
 
@@ -28,10 +39,15 @@
 
             <div class="song-grid" id="songGrid">
                 {% for song in songs %}
-                <div class="song-card" data-id="{{ song.id }}">
-                    <img src="{{ url_for('static', filename='images/album-placeholder.jpg') }}" alt="{{ song.album }}">
+                <div class="song-card" data-id="{{ song.id }}" data-file="{{ song.file_path }}">
+                    <img src="{{ song.album_art or url_for('static', filename='images/album-placeholder.jpg') }}" alt="{{ song.album }}">
                     <h3>{{ song.title }}</h3>
                     <p>{{ song.artist }}</p>
+                    <p class="album-name" data-album="{{ song.album }}">{{ song.album }}</p>
+                    <div class="song-controls">
+                        <button class="play-btn"><i class="fas fa-play"></i></button>
+                        <button class="add-to-playlist-btn"><i class="fas fa-plus"></i></button>
+                    </div>
                 </div>
                 {% endfor %}
             </div>
@@ -43,7 +59,21 @@
         <button class="control-button" id="playButton"><i class="fas fa-play"></i></button>
         <button class="control-button" id="nextButton"><i class="fas fa-forward"></i></button>
         <div class="now-playing">
-            <span id="currentSong">No song playing</span>
+            <img id="currentAlbumArt" src="{{ url_for('static', filename='images/album-placeholder.jpg') }}" alt="Album Art">
+            <div class="song-info">
+                <span id="currentSong">No song playing</span>
+                <span id="currentArtist"></span>
+            </div>
+        </div>
+        <div class="progress-bar">
+            <div class="progress"></div>
+        </div>
+    </div>
+
+    <div id="playlistModal" class="modal">
+        <div class="modal-content">
+            <h2>Add to Playlist</h2>
+            <ul id="playlistOptions"></ul>
         </div>
     </div>
 
