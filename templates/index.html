@@ -1,0 +1,52 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Svarithm - Music Streaming</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <div class="container">
+        <aside class="sidebar">
+            <h1>Svarithm</h1>
+            <nav>
+                <ul>
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#search">Search</a></li>
+                    <li><a href="#library">Your Library</a></li>
+                </ul>
+            </nav>
+        </aside>
+
+        <main class="main-content">
+            <div class="search-container">
+                <input type="text" id="searchInput" class="search-bar" placeholder="Search for songs, artists, or albums">
+            </div>
+
+            <div class="song-grid" id="songGrid">
+                {% for song in songs %}
+                <div class="song-card" data-id="{{ song.id }}">
+                    <img src="{{ url_for('static', filename='images/album-placeholder.jpg') }}" alt="{{ song.album }}">
+                    <h3>{{ song.title }}</h3>
+                    <p>{{ song.artist }}</p>
+                </div>
+                {% endfor %}
+            </div>
+        </main>
+    </div>
+
+    <div class="player-controls">
+        <button class="control-button" id="prevButton"><i class="fas fa-backward"></i></button>
+        <button class="control-button" id="playButton"><i class="fas fa-play"></i></button>
+        <button class="control-button" id="nextButton"><i class="fas fa-forward"></i></button>
+        <div class="now-playing">
+            <span id="currentSong">No song playing</span>
+        </div>
+    </div>
+
+    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+</body>
+</html>

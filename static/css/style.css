@@ -1,0 +1,71 @@
+
+:root {
+    --spotify-green: #1DB954;
+    --dark-bg: #121212;
+    --light-text: #FFFFFF;
+    --secondary-text: #B3B3B3;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Circular Std', Arial, sans-serif;
+    background-color: var(--dark-bg);
+    color: var(--light-text);
+}
+
+.container {
+    display: grid;
+    grid-template-columns: 240px 1fr;
+    height: 100vh;
+}
+
+.sidebar {
+    background-color: #000;
+    padding: 24px;
+}
+
+.main-content {
+    padding: 24px;
+}
+
+.search-bar {
+    width: 100%;
+    padding: 12px;
+    border: none;
+    border-radius: 20px;
+    background-color: #242424;
+    color: var(--light-text);
+    margin-bottom: 20px;
+}
+
+.song-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 20px;
+}
+
+.player-controls {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-color: #181818;
+    padding: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+}
+
+.control-button {
+    background: none;
+    border: none;
+    color: var(--light-text);
+    cursor: pointer;
+    font-size: 24px;
+}
+
+.control-button:hover {
+    color: var(--spotify-green);
+}
